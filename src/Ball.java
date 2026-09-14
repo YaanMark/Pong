@@ -9,6 +9,8 @@ public class Ball {
     public double dx, dy;
     public double speed = 1.6;
 
+    private static final double MIN_DY = 0.35;
+
     public Ball(int x, int y) {
         this.x = x;
         this.y = y;
@@ -51,10 +53,16 @@ public class Ball {
 
         if(bounds.intersects(boundsPlayer)){
             dy *= -1;
-            dx = calcularAnguloSaida(x, Game.player.x, Game.player.width);
+            double novoDx = calcularAnguloSaida(x, Game.player.x, Game.player.width);
+            double[] direcao = calcularNovaDirecao(novoDx, dy);
+            dx = direcao[0];
+            dy = direcao[1];
         }else if(bounds.intersects(boundsEnemy)){
             dy *= -1;
-            dx = calcularAnguloSaida(x, (int)Game.enemy.x, Game.enemy.width);
+            double novoDx = calcularAnguloSaida(x, (int) Game.enemy.x, Game.enemy.width);
+            double[] direcao = calcularNovaDirecao(novoDx, dy);
+            dx = direcao[0];
+            dy = direcao[1];
         }
 
     }
@@ -74,6 +82,19 @@ public class Ball {
         fator = Math.max(-1, Math.min(1, fator));
 
         return fator;
+    }
+
+    private double[] calcularNovaDirecao(double dxNovo, double dyAtual) {
+        double sinalDy = Math.signum(dyAtual);
+        double dyNovo = sinalDy * Math.sqrt(1 - dxNovo * dxNovo);
+
+        if (Math.abs(dyNovo) < MIN_DY) {
+            dyNovo = sinalDy * MIN_DY;
+            double sinalDx = Math.signum(dxNovo);
+            dxNovo = sinalDx * Math.sqrt(1 - dyNovo * dyNovo);
+        }
+
+        return new double[]{dxNovo, dyNovo};
     }
 
 }
