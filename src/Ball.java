@@ -40,7 +40,7 @@ public class Ball {
             if (Game.placarInimigo >= Game.PONTOS_PARA_VENCER) {
                 Game.vencedor = "Inimigo";
             } else {
-                Game.player = new Player(100, Game.HEIGHT - 10);
+                Game.player = new Player(100, Game.HEIGHT - 5);
                 Game.enemy = new Enemy(100, 0);
                 Game.ball = new Ball(100, Game.HEIGHT / 2 - 1);
             }
@@ -50,7 +50,7 @@ public class Ball {
             if (Game.placarJogador >= Game.PONTOS_PARA_VENCER) {
                 Game.vencedor = "Jogador";
             } else {
-                Game.player = new Player(100, Game.HEIGHT - 10);
+                Game.player = new Player(100, Game.HEIGHT - 5);
                 Game.enemy = new Enemy(100, 0);
                 Game.ball = new Ball(100, Game.HEIGHT / 2 - 1);
             }
