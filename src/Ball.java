@@ -14,8 +14,12 @@ public class Ball {
         this.y = y;
         this.width = 4;
         this.height = 4;
-        this.dx = new Random().nextGaussian();
-        this.dy = new Random().nextGaussian();
+        double dxRaw = new Random().nextGaussian();
+        double dyRaw = new Random().nextGaussian();
+        double magnitude = Math.sqrt(dxRaw * dxRaw + dyRaw * dyRaw);
+
+        this.dx = dxRaw / magnitude;
+        this.dy = dyRaw / magnitude;
     }
 
     public void tick() {
@@ -30,27 +34,27 @@ public class Ball {
 
         if(y >= Game.HEIGHT) {
             //Ponto do Inimigo
-            int pontoInimigo = 0;
-            pontoInimigo++;
+            Game.placarInimigo++;
             new Game();
-            System.out.println(pontoInimigo);
+            System.out.println(Game.placarInimigo);
             return;
         }else if(y < 0) {
             //Ponto do Jogador
-            int pontoJogador = 0;
-            pontoJogador++;
+            Game.placarJogador++;
             new Game();
         }
 
-        Rectangle bounds = new Rectangle((int) (x+(dx*speed)), (int) (y+(dx*speed)), width, height);
+        Rectangle bounds = new Rectangle((int) (x+(dx*speed)), (int) (y+(dy*speed)), width, height);
 
         Rectangle boundsPlayer = new Rectangle(Game.player.x, Game.player.y, Game.player.width, Game.player.height);
         Rectangle boundsEnemy = new Rectangle((int) Game.enemy.x, (int) Game.enemy.y, Game.enemy.width, Game.enemy.height);
 
         if(bounds.intersects(boundsPlayer)){
             dy *= -1;
+            dx = calcularAnguloSaida(x, Game.player.x, Game.player.width);
         }else if(bounds.intersects(boundsEnemy)){
             dy *= -1;
+            dx = calcularAnguloSaida(x, (int)Game.enemy.x, Game.enemy.width);
         }
 
     }
@@ -58,6 +62,18 @@ public class Ball {
     public void render(Graphics g) {
         g.setColor(Color.WHITE);
         g.fillRect((int)x,(int) y, width, height);
+    }
+
+    private double calcularAnguloSaida(double ballX, int paddleX, int paddleWidth) {
+        double centroRaquete = paddleX + paddleWidth / 2.0;
+        double centroBola = ballX + width / 2.0;
+        double distancia = centroBola - centroRaquete;
+
+        double fator = distancia / (paddleWidth / 2.0);
+
+        fator = Math.max(-1, Math.min(1, fator));
+
+        return fator;
     }
 
 }
