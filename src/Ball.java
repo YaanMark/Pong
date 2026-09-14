@@ -35,35 +35,37 @@ public class Ball {
         y += dy * speed;
 
         if(y >= Game.HEIGHT) {
-            //Ponto do Inimigo
             Game.placarInimigo++;
             new Game();
+            System.out.println(Game.placarInimigo);
             return;
         }else if(y < 0) {
-            //Ponto do Jogador
             Game.placarJogador++;
             new Game();
         }
 
-        Rectangle bounds = new Rectangle((int) (x+(dx*speed)), (int) (y+(dy*speed)), width, height);
+        Rectangle bounds = new Rectangle((int) x, (int) y, width, height);
 
         Rectangle boundsPlayer = new Rectangle(Game.player.x, Game.player.y, Game.player.width, Game.player.height);
         Rectangle boundsEnemy = new Rectangle((int) Game.enemy.x, (int) Game.enemy.y, Game.enemy.width, Game.enemy.height);
 
         if(bounds.intersects(boundsPlayer)){
             dy *= -1;
+            y = Game.player.y - height;
+
             double novoDx = calcularAnguloSaida(x, Game.player.x, Game.player.width);
             double[] direcao = calcularNovaDirecao(novoDx, dy);
             dx = direcao[0];
             dy = direcao[1];
         }else if(bounds.intersects(boundsEnemy)){
             dy *= -1;
+            y = Game.enemy.y + Game.enemy.height;
+
             double novoDx = calcularAnguloSaida(x, (int) Game.enemy.x, Game.enemy.width);
             double[] direcao = calcularNovaDirecao(novoDx, dy);
             dx = direcao[0];
             dy = direcao[1];
         }
-
     }
 
     public void render(Graphics g) {
