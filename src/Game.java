@@ -66,7 +66,15 @@ public class Game extends Canvas implements Runnable, KeyListener {
         ball.render(g);
 
         g = bs.getDrawGraphics();
-        g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE,null);
+        g.drawImage(layer, 0, 0, WIDTH*SCALE, HEIGHT*SCALE, null);
+
+        // Placar
+        g.setColor(Color.WHITE);
+        g.setFont(new Font("Monospaced", Font.BOLD, 20));
+        String texto = placarJogador + "  x  " + placarInimigo;
+        FontMetrics fm = g.getFontMetrics();
+        int larguraTexto = fm.stringWidth(texto);
+        g.drawString(texto, (WIDTH * SCALE - larguraTexto) / 2, 30);
 
         bs.show();
     }

@@ -38,7 +38,6 @@ public class Ball {
             //Ponto do Inimigo
             Game.placarInimigo++;
             new Game();
-            System.out.println(Game.placarInimigo);
             return;
         }else if(y < 0) {
             //Ponto do Jogador
