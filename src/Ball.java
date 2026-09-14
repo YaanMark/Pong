@@ -7,7 +7,7 @@ public class Ball {
     public int width, height;
 
     public double dx, dy;
-    public double speed = 1.6;
+    public double speed = 1.7;
 
     private static final double MIN_DY = 0.35;
 
@@ -36,12 +36,20 @@ public class Ball {
 
         if(y >= Game.HEIGHT) {
             Game.placarInimigo++;
-            new Game();
-            System.out.println(Game.placarInimigo);
+            if (Game.placarInimigo >= Game.PONTOS_PARA_VENCER) {
+                Game.vencedor = "Inimigo";
+            } else {
+                new Game();
+            }
             return;
         }else if(y < 0) {
             Game.placarJogador++;
-            new Game();
+            if (Game.placarJogador >= Game.PONTOS_PARA_VENCER) {
+                Game.vencedor = "Jogador";
+            } else {
+                new Game();
+            }
+            return;
         }
 
         Rectangle bounds = new Rectangle((int) x, (int) y, width, height);

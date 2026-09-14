@@ -7,9 +7,11 @@ import java.awt.image.BufferedImage;
 
 public class Game extends Canvas implements Runnable, KeyListener {
 
-    public static int WIDTH = 240;
-    public static int HEIGHT = 120;
-    public static int SCALE = 3;
+    public static final int WIDTH = 240;
+    public static final int HEIGHT = 120;
+    public static final int SCALE = 3;
+    public static final int PONTOS_PARA_VENCER = 10;
+    public static String vencedor = null;
 
     public static int placarJogador = 0;
     public static int placarInimigo = 0;
@@ -47,6 +49,10 @@ public class Game extends Canvas implements Runnable, KeyListener {
     }
 
     public void tick() {
+
+        if (vencedor != null) {
+            return;
+        }
         player.tick();
         enemy.tick();
         ball.tick();
@@ -75,6 +81,14 @@ public class Game extends Canvas implements Runnable, KeyListener {
         FontMetrics fm = g.getFontMetrics();
         int larguraTexto = fm.stringWidth(texto);
         g.drawString(texto, (WIDTH * SCALE - larguraTexto) / 2, 30);
+
+        if (vencedor != null) {
+            g.setFont(new Font("Monospaced", Font.BOLD, 36));
+            String textoVencedor = vencedor + " venceu!";
+            FontMetrics fmVencedor = g.getFontMetrics();
+            int larguraVencedor = fmVencedor.stringWidth(textoVencedor);
+            g.drawString(textoVencedor, (WIDTH * SCALE - larguraVencedor) / 2, (HEIGHT * SCALE) / 2);
+        }
 
         bs.show();
     }
