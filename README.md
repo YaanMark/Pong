@@ -105,7 +105,7 @@ java -cp out Main
 
 The game provides a simple and intuitive Pong experience where players can:
 
-- Move their paddles up and down
+- Move their paddles to the left and right
 - Hit the ball back to the opponent
 - Score points when the opponent misses the ball
 
