@@ -36,10 +36,13 @@ public class Ball {
 
         if(y >= Game.HEIGHT) {
             Game.placarInimigo++;
+            System.out.println(Game.placarInimigo);
             if (Game.placarInimigo >= Game.PONTOS_PARA_VENCER) {
                 Game.vencedor = "Inimigo";
             } else {
-                new Game();
+                Game.player = new Player(100, Game.HEIGHT - 10);
+                Game.enemy = new Enemy(100, 0);
+                Game.ball = new Ball(100, Game.HEIGHT / 2 - 1);
             }
             return;
         }else if(y < 0) {
@@ -47,7 +50,9 @@ public class Ball {
             if (Game.placarJogador >= Game.PONTOS_PARA_VENCER) {
                 Game.vencedor = "Jogador";
             } else {
-                new Game();
+                Game.player = new Player(100, Game.HEIGHT - 10);
+                Game.enemy = new Enemy(100, 0);
+                Game.ball = new Ball(100, Game.HEIGHT / 2 - 1);
             }
             return;
         }
@@ -60,6 +65,7 @@ public class Ball {
         if(bounds.intersects(boundsPlayer)){
             dy *= -1;
             y = Game.player.y - height;
+            SoundManager.tocarEfeito("/res/hit_player.wav", 1);
 
             double novoDx = calcularAnguloSaida(x, Game.player.x, Game.player.width);
             double[] direcao = calcularNovaDirecao(novoDx, dy);
@@ -68,6 +74,7 @@ public class Ball {
         }else if(bounds.intersects(boundsEnemy)){
             dy *= -1;
             y = Game.enemy.y + Game.enemy.height;
+            SoundManager.tocarEfeito("/res/hit_enemy.wav", 0.2f);
 
             double novoDx = calcularAnguloSaida(x, (int) Game.enemy.x, Game.enemy.width);
             double[] direcao = calcularNovaDirecao(novoDx, dy);
