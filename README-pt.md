@@ -9,7 +9,6 @@ Este projeto recria o clássico jogo de arcade da Atari de 1972, permitindo que 
 ## 📋 Funcionalidades
 
 
-✅ Modo dois jogadores (local)
 
 ✅ Movimentação das raquetes e detecção de colisão
 
@@ -100,10 +99,9 @@ java -cp out Main
 ## 🎮 Controles
 
 
-| Jogador   | Mover para Cima | Mover para Baixo |
+| Jogador   | Mover para Esquerda | Mover para Direita |
 | --------- | ---------------- | ------------------ |
-| Jogador 1 | W                 | S                   |
-| Jogador 2 | ↑                 | ↓                   |
+| Jogador 1 | A               | D                   |
 
 > Os controles podem variar de acordo com a implementação dentro da pasta `src`.
 
@@ -114,10 +112,9 @@ java -cp out Main
 
 O jogo oferece uma experiência simples e intuitiva de Pong, onde os jogadores podem:
 
-- Mover suas raquetes para cima e para baixo
+- Mover suas raquetes de um lado para outro
 - Rebater a bola para o adversário
 - Marcar pontos quando o adversário erra a bola
-- Competir em tempo real na mesma tela
 
 ---
 
@@ -138,10 +135,8 @@ Este projeto demonstra:
 ## 📸 Melhorias Futuras
 
 
-- Modo um jogador contra IA
 - Níveis de dificuldade
-- Efeitos sonoros
-- Telas de Início / Pausa / Fim de Jogo
+- Tela de  Pausa
 - Cores personalizáveis para raquetes e bola
 - Persistência de pontuação
 
