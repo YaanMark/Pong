@@ -8,8 +8,6 @@ This project recreates the classic 1972 Atari arcade game, allowing two players 
 
 ## 📋 Features
 
-✅ Two-player local gameplay
-
 ✅ Paddle movement and collision detection
 
 ✅ Ball physics and bouncing mechanics
@@ -94,10 +92,9 @@ java -cp out Main
 ## 🎮 Controls
 
 
-| Player   | Move Up | Move Down |
+| Player   | Move Left | Move Right |
 | -------- | ------- | --------- |
-| Player 1 | W       | S         |
-| Player 2 | ↑       | ↓         |
+| Player 1 | A       | D         |
 
 > Controls may vary depending on the implementation inside `src`.
 
@@ -111,7 +108,6 @@ The game provides a simple and intuitive Pong experience where players can:
 - Move their paddles up and down
 - Hit the ball back to the opponent
 - Score points when the opponent misses the ball
-- Compete in real time on the same screen
 
 ---
 
@@ -132,12 +128,9 @@ This project demonstrates:
 ## 📸 Future Improvements
 
 
-- Single-player mode against an AI opponent
 - Difficulty levels
-- Sound effects
-- Start / Pause / Game Over screens
+- Pause screen
 - Customizable paddle and ball colors
-- Score persistence
 
 ---
 
